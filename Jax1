@@ -1,0 +1,26 @@
+export default function HowItWorks() {
+  const steps = [
+    { num: "1", title: "Enter Your Address", desc: "We pull public records to estimate the age of your roof, HVAC, windows, and more." },
+    { num: "2", title: "Tell Us a Few Details", desc: "Quick sliders for each component (or skip — we estimate)." },
+    { num: "3", title: "Get Your Score + Report", desc: "Instant SOHR Score, personalized recommendations, and value impact estimate." }
+  ];
+
+  return (
+    <main className="max-w-4xl mx-auto py-16 px-4">
+      <h1 className="text-4xl font-bold text-center mb-12">How It Works — <span className="text-blue-600">3 Simple Steps</span></h1>
+      <div className="space-y-8">
+        {steps.map((step, i) => (
+          <div key={i} className="flex items-start gap-6 bg-gray-50 p-6 rounded-2xl">
+            <div className="w-12 h-12 bg-blue-600 text-white text-2xl font-bold rounded-full flex items-center justify-center flex-shrink-0">
+              {step.num}
+            </div>
+            <div>
+              <h3 className="text-2xl font-semibold">{step.title}</h3>
+              <p className="text-gray-600 text-lg">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+}
