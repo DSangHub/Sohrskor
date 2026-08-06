@@ -1,0 +1,5 @@
+✅ Fix:
+# Check DATABASE_URL in Railway Variables
+# Make sure PostgreSQL is running
+# Test connection in Shell:
+npx prisma db execute --file /dev/null
