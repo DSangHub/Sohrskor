@@ -1,0 +1,8 @@
+1. In Railway dashboard, click your project
+2. Click "New" → "Database" → "PostgreSQL"
+3. Wait for database to provision (2-3 minutes)
+4. Click the database → "Variables"
+5. Copy "DATABASE_URL" value
+6. Go back to your service → "Variables"
+7. Add DATABASE_URL with the copied value
+8. Click "Deploy" to restart with database
