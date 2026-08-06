@@ -1,0 +1,32 @@
+import { prisma } from '@/lib/db';
+import { NextResponse } from 'next/server';
+
+export async function POST(request) {
+  try {
+    const { userId, components, replacements, scoreResult } = await request.json();
+    
+    // Save components
+    for (const [type, data] of Object.entries(components)) {
+      await prisma.component.upsert({
+        where: { userId_type: { userId, type } },
+        update: { ageYears: data.age },
+        create: { userId, type, ageYears: data.age }
+      });
+    }
+    
+    // Save score history
+    const score = await prisma.score.create({
+      data: {
+        userId,
+        score: scoreResult.score,
+        bci: scoreResult.bci,
+        pri: scoreResult.pri,
+        grade: scoreResult.grade
+      }
+    });
+    
+    return NextResponse.json({ success: true, scoreId: score.id });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}
