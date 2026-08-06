@@ -1,0 +1,29 @@
+# Install CLI
+npm install -g @railway/cli
+
+# Login
+railway login
+
+# List projects
+railway list
+
+# Deploy current directory
+railway up
+
+# Open dashboard
+railway open
+
+# View logs
+railway logs
+
+# Restart service
+railway restart
+
+# Set environment variable
+railway variables set NEXTAUTH_SECRET "your-secret"
+
+# Get environment variables
+railway variables get DATABASE_URL
+
+# Connect to database shell
+railway connect
