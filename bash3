@@ -1,0 +1,31 @@
+# 1. Navigate to your project
+cd sohr-score-app
+
+# 2. Create railway.json (root directory)
+cat > railway.json << 'EOF'
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "NIXPACKS"
+  },
+  "deploy": {
+    "numReplicas": 1,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
+}
+EOF
+
+# 3. Create .railwayignore (optional)
+cat > .railwayignore << 'EOF'
+.git
+node_modules
+.next
+.vercel
+.env.local
+EOF
+
+# 4. Ensure package.json has correct scripts
+# Check that you have:
+# "build": "prisma generate && next build"
+# "start": "next start"
