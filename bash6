@@ -1,0 +1,3 @@
+# Run this command
+openssl rand -base64 32
+# Copy the output and paste as NEXTAUTH_SECRET
