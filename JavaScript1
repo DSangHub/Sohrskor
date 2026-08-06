@@ -1,0 +1,26 @@
+import { calculateSOHR, getRecommendations } from '@/lib/calculator';
+import { NextResponse } from 'next/server';
+
+export async function POST(request) {
+  try {
+    const { components, replacements } = await request.json();
+    
+    const result = calculateSOHR(components, replacements);
+    const recommendations = getRecommendations(components);
+    
+    return NextResponse.json({
+      ...result,
+      recommendations,
+      valueImpact: estimateValueImpact(result.score, components.address)
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 400 });
+  }
+}
+
+function estimateValueImpact(score, address) {
+  // Simplified — in production, use home value API
+  const baseValue = 350000;
+  const impact = score >= 70 ? 0.05 : score >= 50 ? 0.02 : -0.03;
+  return Math.round(baseValue * impact);
+}
