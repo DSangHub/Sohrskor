@@ -1,0 +1,7 @@
+Task Command
+Initialize project npx create-next-app@latest sohr-score
+Install dependencies npm install prisma @prisma/client next-auth
+Setup database npx prisma db push
+Run locally npm run dev
+Deploy to Vercel Push to GitHub → Connect to Vercel
+
