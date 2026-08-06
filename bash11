@@ -1,0 +1,7 @@
+✅ Fix:
+# Check logs in Railway Dashboard
+# Then in Shell:
+npm install --force
+npx prisma generate
+npm run build
+npm start
