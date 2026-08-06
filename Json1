@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "next": "14.x",
+    "react": "18.x",
+    "react-dom": "18.x",
+    "@prisma/client": "^5.0.0",
+    "next-auth": "^4.24.0"
+  },
+  "devDependencies": {
+    "prisma": "^5.0.0"
+  }
+}
