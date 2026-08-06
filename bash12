@@ -1,0 +1,11 @@
+# Any time you push changes:
+git add .
+git commit -m "Update feature"
+git push origin main
+
+# Railway automatically:
+# 1. Detects push
+# 2. Builds new version
+# 3. Runs migrations
+# 4. Deploys
+# 5. No downtime
