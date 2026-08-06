@@ -1,0 +1,18 @@
+sohr-score/
+├── app/
+│   ├── page.js              # Homepage
+│   ├── how-it-works/page.js
+│   ├── dashboard/page.js    # Protected route
+│   ├── api/
+│   │   ├── calculate/route.js    # POST - computes SOHR Score
+│   │   ├── save-score/route.js   # POST - saves to database
+│   │   └── auth/[...nextauth]/route.js
+│   └── layout.js
+├── lib/
+│   ├── calculator.js        # Core SOHR formula
+│   └── db.js               # Database connection
+├── prisma/
+│   └── schema.prisma       # Database schema
+├── .env.local              # Environment variables
+├── package.json
+└── vercel.json
