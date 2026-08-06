@@ -1,0 +1,5 @@
+✅ Fix:
+# In Railway Variables, add ALL these:
+DATABASE_URL=postgresql://...
+NEXTAUTH_SECRET=your-secret
+NEXTAUTH_URL=https://your-app.railway.app
