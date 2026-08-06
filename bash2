@@ -1,0 +1,5 @@
+# 1. Install Render CLI
+npm install -g render-cli
+
+# 2. Deploy
+render deploy --config render.yaml
