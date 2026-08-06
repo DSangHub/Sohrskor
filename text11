@@ -1,0 +1,9 @@
+1. In Railway dashboard, click your service
+2. Click "Shell" tab
+3. Run these commands:
+
+npx prisma generate
+npx prisma db push
+npx prisma db seed
+
+4. Exit shell
