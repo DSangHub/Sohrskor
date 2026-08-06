@@ -1,0 +1,14 @@
+# 1. Install Railway CLI
+npm install -g @railway/cli
+
+# 2. Login
+railway login
+
+# 3. Initialize project
+railway init
+
+# 4. Deploy
+railway up
+
+# 5. Open dashboard
+railway open
