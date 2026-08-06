@@ -1,0 +1,7 @@
+1. Go to railway.app
+2. Sign up with GitHub (free)
+3. Click "New Project"
+4. Click "Deploy from GitHub repo"
+5. Select "sohr-score-app" repository
+6. Railway auto-detects Next.js
+7. Click "Deploy"
