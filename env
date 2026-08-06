@@ -1,0 +1,7 @@
+# Required
+DATABASE_URL="postgresql://..."  # Auto-added from database step
+NEXTAUTH_SECRET="your-secret"    # Generate below
+NEXTAUTH_URL="https://sohr-score-app.railway.app"
+
+# Optional
+BARCODE_LOOKUP_API_KEY="your-key"  # For barcode lookup
