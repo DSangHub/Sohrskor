@@ -1,0 +1,5 @@
+1. Railway Dashboard → Your Service
+2. Click "Deployments" 
+3. Find previous working deployment
+4. Click "Rollback" 
+5. App reverts to previous version
