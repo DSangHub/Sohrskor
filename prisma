@@ -1,0 +1,56 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  address       String
+  addressLat    Float?
+  addressLng    Float?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  components    Component[]
+  replacements  Replacement[]
+  scores        Score[]
+}
+
+model Component {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  type        String   // roof, hvac, woodFlours, windows, carpet, blinds, waterHeater
+  ageYears    Float    // estimated age
+  lastUpdated DateTime @default(now())
+  
+  @@unique([userId, type])
+}
+
+model Replacement {
+  id               String   @id @default(cuid())
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  component        String   // roof, hvac, etc.
+  yearReplaced     Int
+  recommendedYear  Int
+  partner          String?  // 'lowes', 'homedepot', etc.
+  partnerOrderId   String?  // for verification
+  createdAt        DateTime @default(now())
+}
+
+model Score {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  score       Float
+  bci         Float
+  pri         Float
+  grade       String
+  createdAt   DateTime @default(now())
+}
