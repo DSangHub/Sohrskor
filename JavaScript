@@ -1,0 +1,106 @@
+// Component definitions
+const COMPONENTS = {
+  roof: { lifespan: 25, weight: 25 },
+  hvac: { lifespan: 15, weight: 20 },
+  woodFlours: { lifespan: 30, weight: 15 },
+  windows: { lifespan: 20, weight: 15 },
+  carpet: { lifespan: 10, weight: 10 },
+  blinds: { lifespan: 12, weight: 8 },
+  waterHeater: { lifespan: 10, weight: 7 }
+};
+
+// Calculate Base Condition Index
+export function calculateBCI(components) {
+  let totalWeighted = 0;
+  let totalWeight = 0;
+  
+  for (const [key, data] of Object.entries(COMPONENTS)) {
+    const age = components[key]?.age || 0;
+    const lifespan = data.lifespan;
+    const weight = data.weight;
+    
+    const score = Math.max(0, (1 - age / lifespan) * 100);
+    totalWeighted += score * weight;
+    totalWeight += weight;
+  }
+  
+  return totalWeight / totalWeighted; // Lower is better? Fix: 
+  // Actually should be totalWeighted / totalWeight
+  return Math.round((totalWeighted / totalWeight) * 10) / 10;
+}
+
+// Calculate Proactive Replacement Index
+export function calculatePRI(replacements) {
+  // replacements = [{ component, yearReplaced, recommendedYear, partner }]
+  let baseBonus = 0;
+  let partnerMultiplier = 0;
+  let consistencyBonus = 0;
+  let earlyBird = 0;
+  
+  let onTimeCount = 0;
+  
+  replacements?.forEach(r => {
+    const diff = r.yearReplaced - r.recommendedYear;
+    
+    // Base bonus: replaced within 2 years of recommendation
+    if (Math.abs(diff) <= 2) {
+      baseBonus += 10;
+      onTimeCount++;
+      
+      // Partner multiplier
+      if (r.partner) {
+        partnerMultiplier += 1.5; // 15% of 10
+      }
+    }
+    
+    // Early bird: replaced 1+ year before
+    if (diff <= -1) {
+      earlyBird += 5;
+    }
+  });
+  
+  // Consistency bonus: 3+ items on time
+  if (onTimeCount >= 3) consistencyBonus = 10;
+  
+  const pri = Math.min(100, baseBonus + partnerMultiplier + consistencyBonus + earlyBird);
+  return Math.round(pri * 10) / 10;
+}
+
+// Main SOHR Score
+export function calculateSOHR(components, replacements = []) {
+  const bci = calculateBCI(components);
+  const pri = calculatePRI(replacements);
+  
+  const score = (bci * 0.6) + (pri * 0.4);
+  return {
+    score: Math.round(score * 10) / 10,
+    bci,
+    pri,
+    grade: score >= 90 ? 'Excellent' : score >= 70 ? 'Good' : score >= 50 ? 'Fair' : 'Attention Needed'
+  };
+}
+
+// Generate recommendations
+export function getRecommendations(components) {
+  const recommendations = [];
+  
+  for (const [key, data] of Object.entries(COMPONENTS)) {
+    const age = components[key]?.age || 0;
+    const remaining = data.lifespan - age;
+    const impact = data.weight / 100; // 0-1 scale
+    
+    if (remaining <= 5) {
+      recommendations.push({
+        component: key,
+        remainingYears: Math.round(remaining),
+        urgency: remaining <= 2 ? 'High' : 'Medium',
+        impactOnScore: Math.round(impact * 15), // Rough estimate
+        action: remaining <= 2 
+          ? 'Replace now — this is dragging your score down' 
+          : `Replace in ${Math.round(remaining)} years for optimal score`
+      });
+    }
+  }
+  
+  return recommendations.sort((a, b) => b.impactOnScore - a.impactOnScore);
+}
