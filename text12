@@ -1,0 +1,5 @@
+1. Click on your service
+2. Click "Deployments" tab
+3. Click the latest deployment
+4. Click "View Logs" to see build progress
+5. Once "Ready" appears, click "Open"
