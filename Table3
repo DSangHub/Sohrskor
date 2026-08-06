@@ -1,0 +1,8 @@
+Element Recommendation
+Platform Webflow or Carrd (no-code)
+Address lookup SmartyStreets or Google Places API
+Public records CoreLogic / ATTOM / County assessor API (or skip initially — let user input ages)
+Database Airtable (to store user scores)
+Hosting Netlify or Vercel (if custom code)
+Cost to launch ~$50–100/mo for APIs + hosting
+
